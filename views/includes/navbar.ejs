@@ -1,15 +1,169 @@
+<style>
+.search-btn {
+  background-color: #fe424d;
+  color: #fff;
+  border-radius: 25px;
+  padding: 0 1rem;
+}
+
+.search-btn:hover {
+  background-color: #fe424d;
+  color: #fff;
+}
+
+.search-btn i {
+  display: inline;
+  margin-right: 0.5rem;
+}
+
+.search-inp {
+  border-radius: 25px;
+  padding: 0.5rem 3rem;
+  font-size: 1rem;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+}
+
+.navbar-toggler {
+  z-index: 1100;
+}
+
+.brand-text {
+  font-family: "Kaushan Script", cursive;
+  font-size: 1.6rem;
+  color: #FE424D;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+  .search-form {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .search-inp,
+  .search-btn {
+    width: 100%;
+  }
+
+  .responsive-registeration {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .responsive-registeration .nav-link {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .search-form {
+    width: 50%;
+  }
+}
+
+
+@media (max-width: 770px) {
+  .dropdown {
+    display: none;
+  }
+}
+
+
+.dropdown-toggle {
+  width: 72px;
+  height: 45px;
+  border-radius: 25px;
+}
+</style>
+
+
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
 
+    <!-- Brand -->
+    <a class="navbar-brand mt-3 d-flex gap-2" href="/listings">
+      <i class="fa-solid fa-compass"></i>
+      <span class="brand-text"><b>Wanderlust</b></span>
+    </a>
+
+    <!-- Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Collapse -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/listings">All Listings</a>
-        <a class="nav-link" href="/listings/new">Add new Listings</a>
+
+      <!-- SEARCH BAR (CENTER) -->
+      <form action="/listings/search"
+            class="d-flex flex-column flex-md-row gap-2 mx-md-auto my-3 my-md-0 search-form"
+            role="search"
+            method="GET">
+        <input class="form-control search-inp" type="search" name="q" placeholder="Search destinations"/>
+        <button class="btn search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>Search
+        </button>
+      </form>
+
+
+      <!-- MOBILE AUTH LINKS -->
+<div class="d-md-none text-center mt-3">
+  <% if(!currUser) { %>
+    <a class="btn w-100 mb-2" href="/signup">
+      <i class="fa-solid fa-user-plus"></i>&nbsp;<b>Sign up</b>
+    </a>
+    <a class="btn w-100 mb-2" href="/login">
+      <i class="fa-solid fa-user-check"></i>&nbsp;<b>Log in</b>
+    </a>
+  <% } %>
+
+  <a class="btn w-100" href="/listings/new">
+    <i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Airbnb Your home</b>
+  </a>
+</div>
+
+
+      <!-- RIGHT SIDE DROPDOWN -->
+      <div class="dropdown ms-md-auto text-center responsive-registeration">
+        <button class="btn btn-success dropdown-toggle me-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-circle-user"></i>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+          <% if(!currUser) { %>
+            <li>
+              <a class="dropdown-item" href="/signup">
+                <i class="fa-solid fa-user-plus"></i>&nbsp;<b>Sign up</b>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/login">
+                <i class="fa-solid fa-user-check"></i>&nbsp;<b>Log in</b>
+              </a>
+            </li>
+          <% } %>
+
+          <% if(currUser) { %>
+            <li>
+              <a class="dropdown-item" href="/logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;<b>Log out</b>
+              </a>
+            </li>
+          <% } %>
+
+          <li>
+            <a class="dropdown-item" href="/listings/new">
+              <i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Airbnb Your home</b>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
