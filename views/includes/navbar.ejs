@@ -68,20 +68,23 @@
   }
 }
 
-
 @media (max-width: 770px) {
-  .dropdown {
-    display: none;
+  .log-btn {
+    display: block;
   }
 }
 
+@media (max-width: 770px) {
+  .dropdown-toggle {
+    display: none;
+  }
+}
 
 .dropdown-toggle {
   width: 72px;
   height: 45px;
   border-radius: 25px;
 }
- 
 </style>
 
 
@@ -115,20 +118,32 @@
 
 
       <!-- MOBILE AUTH LINKS -->
-<div class="d-md-none text-center mt-3">
-  <% if(!currUser) { %>
-    <a class="btn w-100 mb-2" href="/signup">
-      <i class="fa-solid fa-user-plus"></i>&nbsp;<b>Sign up</b>
-    </a>
-    <a class="btn w-100 mb-2" href="/login">
-      <i class="fa-solid fa-user-check"></i>&nbsp;<b>Log in</b>
-    </a>
-  <% } %>
+      <div class="d-md-none text-center mt-3">
+        <% if(!currUser) { %>
+          <a class="btn w-100 mb-2" href="/signup">
+            <i class="fa-solid fa-user-plus"></i>&nbsp; &nbsp;<b>Sign up</b>
+          </a>
+          <a class="btn w-100 mb-2" href="/login">
+            <i class="fa-solid fa-user-check"></i>&nbsp; &nbsp;<b>Log in</b>
+          </a>
+        <% } %>
 
-  <a class="btn w-100" href="/listings/new">
-    <i class="fa-solid fa-circle-plus"></i>&nbsp;<b>Airbnb Your home</b>
-  </a>
-</div>
+        <% if(currUser) { %>
+          <h6 class="mt-1 nav-link">
+            <b>
+              <i class="fa-solid fa-user"></i>
+              &nbsp; &nbsp;<%= currUser.username%>
+            </b>
+          </h6>
+          <a class="btn w-100 mb-2 mt-3" href="/logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;<b>Log out</b>
+          </a>
+        <% } %>
+        
+        <a class="btn w-100 mb-2 pb-3" href="/listings/new">
+          <i class="fa-solid fa-circle-plus"></i>&nbsp; &nbsp;<b>Airbnb Your home</b>
+        </a>
+      </div>
 
 
       <!-- RIGHT SIDE DROPDOWN -->
