@@ -38,10 +38,16 @@
   color: #FE424D;
 }
 
-/* Mobile responsiveness */
+.dropdown-toggle {
+  width: 72px;
+  height: 45px;
+  border-radius: 25px;
+}
+
+/* Responsive */
 @media (max-width: 576px) {
   .search-form {
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
   }
 
@@ -52,7 +58,6 @@
 
   .responsive-registeration {
     width: 100%;
-    margin: 0 auto;
     text-align: center;
   }
 
@@ -60,35 +65,20 @@
     width: 100%;
     padding: 0.5rem 0;
   }
+
+  .cent {
+    width: 100%;
+  }
 }
 
 @media (min-width: 1024px) {
   .search-form {
-    width: 50%;
+    width: 90%;
   }
-}
-
-@media (max-width: 770px) {
-  .log-btn {
-    display: block;
-  }
-}
-
-@media (max-width: 770px) {
-  .dropdown-toggle {
-    display: none;
-  }
-}
-
-.dropdown-toggle {
-  width: 72px;
-  height: 45px;
-  border-radius: 25px;
 }
 </style>
 
-
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
 
     <!-- Brand -->
@@ -105,26 +95,28 @@
     <!-- Collapse -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
-      <!-- SEARCH BAR (CENTER) -->
-      <form action="/listings/search"
-            class="d-flex flex-column flex-md-row gap-2 mx-md-auto my-3 my-md-0 search-form"
-            role="search"
-            method="GET">
-        <input class="form-control search-inp" type="search" name="q" placeholder="Search destinations"/>
-        <button class="btn search-btn" type="submit">
-          <i class="fa-solid fa-magnifying-glass"></i>Search
-        </button>
-      </form>
-
+      <!-- SEARCH BAR -->
+      <div class="cent d-flex justify-content-center w-100">
+        <form action="/listings/search"
+              class="d-flex flex-column flex-md-row gap-2 mx-md-auto my-3 my-md-0 search-form"
+              role="search"
+              method="GET">
+          <input class="form-control search-inp" type="search" name="q" placeholder="Search destinations"/>
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
+        </form>
+      </div>
 
       <!-- MOBILE AUTH LINKS -->
-      <div class="d-md-none text-center mt-3">
+      <div class="d-lg-none text-center mt-3">
+
         <% if(!currUser) { %>
           <a class="btn w-100 mb-2" href="/signup">
-            <i class="fa-solid fa-user-plus"></i>&nbsp; &nbsp;<b>Sign up</b>
+            <i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;<b>Sign up</b>
           </a>
           <a class="btn w-100 mb-2" href="/login">
-            <i class="fa-solid fa-user-check"></i>&nbsp; &nbsp;<b>Log in</b>
+            <i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;<b>Log in</b>
           </a>
         <% } %>
 
@@ -132,22 +124,21 @@
           <h6 class="mt-1 nav-link">
             <b>
               <i class="fa-solid fa-user"></i>
-              &nbsp; &nbsp;<%= currUser.username%>
+              &nbsp;&nbsp;<%= currUser.username %>
             </b>
           </h6>
           <a class="btn w-100 mb-2 mt-3" href="/logout">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;<b>Log out</b>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;&nbsp;<b>Log out</b>
           </a>
         <% } %>
-        
+
         <a class="btn w-100 mb-2 pb-3" href="/listings/new">
-          <i class="fa-solid fa-circle-plus"></i>&nbsp; &nbsp;<b>Airbnb Your home</b>
+          <i class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;<b>Airbnb Your home</b>
         </a>
       </div>
 
-
-      <!-- RIGHT SIDE DROPDOWN -->
-      <div class="dropdown ms-md-auto text-center responsive-registeration">
+      <!-- DESKTOP DROPDOWN -->
+      <div class="dropdown ms-md-auto text-center responsive-registeration d-none d-lg-block">
         <button class="btn btn-success dropdown-toggle me-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa-solid fa-circle-user"></i>
         </button>
@@ -167,7 +158,7 @@
           <% } %>
 
           <% if(currUser) { %>
-            <li class="wide-ang">
+            <li>
               <a class="dropdown-item" href="/logout">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;<b>Log out</b>
               </a>
@@ -181,6 +172,7 @@
           </li>
         </ul>
       </div>
+
     </div>
   </div>
 </nav>
